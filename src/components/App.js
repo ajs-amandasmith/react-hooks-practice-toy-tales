@@ -24,6 +24,11 @@ function App() {
     setToyData([...toyData, newToy]);
   }
 
+  function deleteToy(id) {
+    const newToys = toyData.filter(toy => toy.id !== id)
+    setToyData(newToys);
+  }
+
   return (
     <>
       <Header />
@@ -31,7 +36,7 @@ function App() {
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
-      <ToyContainer toyData={toyData} />
+      <ToyContainer toyData={toyData} deleteToy={deleteToy} />
     </>
   );
 }
@@ -44,8 +49,6 @@ App
   |__ToyForm
   |__ToyContainer
         |__ToyCard
-
-When the Donate to Goodwill button is clicked, make a DELETE request to /toys/:id with the ID of the toy that was clicked to delete the toy from the server. The ToyCard that you clicked on should also be removed from the DOM.
 
 When the like button is clicked, make a PATCH request to /toys/:id with the id of the toy that was clicked, along with the new number of likes (this should be sent in the body of the PATCH request, as a object: { likes: 10 }), to update the toy on the server. Clicking on the button should also increase the number of likes on the DOM.
 
